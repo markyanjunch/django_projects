@@ -23,6 +23,9 @@ class Ad(models.Model) :
     favorites = models.ManyToManyField(settings.AUTH_USER_MODEL,
         through='Fav', related_name='favorite_ads')
 
+    # Tags
+    tags = TaggableManager(blank=True)
+
     # Shows up in the admin list
     def __str__(self):
         return self.title
