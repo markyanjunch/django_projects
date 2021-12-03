@@ -31,6 +31,7 @@ class AdListView(OwnerListView):
             # __icontains for case-insensitive search
             query = Q(title__icontains=strval)
             query.add(Q(text__icontains=strval), Q.OR)
+            query.add(Q(tags__name__in=[strval]), Q.OR)
             objects = Ad.objects.filter(query).select_related().order_by('-updated_at')[:10]
         else :
             objects = Ad.objects.all().order_by('-updated_at')[:10]
@@ -38,7 +39,6 @@ class AdListView(OwnerListView):
         # Augment the objects
         for obj in objects:
             obj.natural_updated = naturaltime(obj.updated_at)
-
 
         # FAVORITES CODE
         # ad_list = Ad.objects.all()
@@ -81,6 +81,7 @@ class AdCreateView(OwnerCreateView):
         ad = form.save(commit=False)
         ad.owner = self.request.user
         ad.save()
+        form.save_m2m()
         return redirect(self.success_url)
 
 class AdUpdateView(OwnerUpdateView):
@@ -103,7 +104,7 @@ class AdUpdateView(OwnerUpdateView):
 
         ad = form.save(commit=False)
         ad.save()
-
+        form.save_m2m()
         return redirect(self.success_url)
 
 
