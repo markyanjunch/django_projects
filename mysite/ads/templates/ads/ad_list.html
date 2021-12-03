@@ -22,22 +22,7 @@
         <a href="{% url 'ads:ad_delete' ad.id %}">Delete</a>)
         {% endif %}
 
-        <div style="left:10px">
-            {% if ad.text|length < 100 %}
-                {{ ad.text }}
-            {% else %}
-                {{ ad.text|slice:"0:99" }}
-                <a href="{% url 'ads:ad_detail'  ad.id %}">...</a>
-            {% endif %}
-        </div>
-        <small>
-        {% if ad.owner.username %}
-            posted by {{ ad.owner.username }}
-        {% endif %}
-        {{ ad.natural_updated }}
-        </small>
-
-    {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
         <!-- Two hrefs with two stacked icons each - one showing and one hidden -->
         <a href="#" onclick=
             "favPost('{% url 'ads:ad_unfavorite' ad.id %}', {{ ad.id }} );return false;"
@@ -59,6 +44,23 @@
         </span>
         </a>
         {% endif %}
+    
+        <div style="left:10px">
+            {% if ad.text|length < 100 %}
+                {{ ad.text }}
+            {% else %}
+                {{ ad.text|slice:"0:99" }}
+                <a href="{% url 'ads:ad_detail'  ad.id %}">...</a>
+            {% endif %}
+        </div>
+        <small>
+        {% if ad.owner.username %}
+            posted by {{ ad.owner.username }}
+        {% endif %}
+        {{ ad.natural_updated }}
+        </small>
+
+
 
     </li>
   {% endfor %}
