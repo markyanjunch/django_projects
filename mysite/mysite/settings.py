@@ -56,6 +56,9 @@ INSTALLED_APPS = [
     'cats.apps.CatsConfig',
     'stars.apps.StarsConfig',
     'gadgets.apps.GadgetsConfig',
+
+    # TBD Homework
+    'solo.apps.SoloConfig'
 ]
 
 # When we get to crispy forms :)
