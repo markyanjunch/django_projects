@@ -33,6 +33,7 @@ urlpatterns = [
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_ROOT = os.path.join(BASE_DIR, 'site')
 urlpatterns += [
+    path('solo/', include('solo.urls')),
     path('polls/', include('polls.urls')),
     path('hello/', include('hello.urls')),
     path('autos/', include('autos.urls')),
