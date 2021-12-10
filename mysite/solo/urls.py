@@ -4,5 +4,5 @@ from . import views
 
 app_name = 'solo'
 urlpatterns = [
-    path('', views.MainView),
+    path('', views.MainView.as_view(), name='main'),
 ]
